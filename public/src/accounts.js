@@ -22,23 +22,23 @@ function numberOfBorrows(account, books) {
   return result;
 }
 
-function getBooksPossessedByAccount(account, books, authors) {let possessedBooks = [];
-  for (let i = 0;i < books.length; i++) {
-    let book = books[i];
+function getBooksPossessedByAccount(account, books, authors) {
+  let possessedBooks = [];
+  books.forEach((book) => {
     const {id, title, genre, borrows} = book;
-    for (let j = 0; j < borrows.length; j++) {
-      if (borrows[j].id === account.id && borrows[j].returned === false) {
-        for (let k = 0; k < authors.length; k++) {
-          let author = authors[k];
+    borrows.forEach((borrow) => {
+      if (borrow.id === account.id && borrow.returned === false) {
+        authors.forEach(author => {
           if (author.id == book.authorId) {
             let tempBook = {id, title, genre, author, borrows};
             possessedBooks.push(tempBook);
           }
-        }
+        })
       }
-    }
-  }
-  return possessedBooks;}
+    })
+  })
+  return possessedBooks;
+}
 
 module.exports = {
   findAccountById,

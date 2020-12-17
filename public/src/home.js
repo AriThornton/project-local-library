@@ -1,16 +1,12 @@
 function totalBooksCount(books) {
   let result = 0;
-  for (let i = 0; i < books.length; i++) {
-    result += 1;
-  }
+  books.forEach(book => result++);
   return result;
 }
 
 function totalAccountsCount(accounts) {
   let result = 0;
-  for (let i = 0; i < accounts.length; i++) {
-    result += 1;
-  }
+  accounts.forEach(account => result++)
   return result;
 }
 
@@ -38,19 +34,19 @@ function getMostCommonGenres(books) {
     newObj["count"] = element;
     commonGenres.push(newObj);
   }
-  let result = commonGenres.sort((a,b) => {
-    if (a.count > b.count) return -1;
-    if (a.count < b.count) return 1;
+  let result = commonGenres.sort((genreA,genreB) => {
+    if (genreA.count > genreB.count) return -1;
+    if (genreA.count < genreB.count) return 1;
     return 0;
   })
   return result.slice(0,5);
 }
 
 function getMostPopularBooks(books) {
-  let allBooks = books.map((book) => ({name: book.title, count: book.borrows.length}));
-  let result = allBooks.sort((a,b) => {
-    if (a.count > b.count) return -1;
-    if (a.count < b.count) return 1;
+  let allPopularBooks = books.map((book) => ({name: book.title, count: book.borrows.length}));
+  let result = allPopularBooks.sort((bookA,bookB) => {
+    if (bookA.count > bookB.count) return -1;
+    if (bookA.count < bookB.count) return 1;
     return 0;
   })
   return result.slice(0,5);let allBooks = books.map((book) => ({name: book.title, count: book.borrows.length}));
@@ -78,9 +74,9 @@ function getMostPopularAuthors(books, authors) {
     newObj["count"] = element;
     allPopularAuthors.push(newObj);
   }
-  let result = allPopularAuthors.sort((a,b) => {
-    if (a.count > b.count) return -1;
-    if (a.count < b.count) return 1;
+  let result = allPopularAuthors.sort((authorA,authorB) => {
+    if (authorA.count > authorB.count) return -1;
+    if (authorA.count < authorB.count) return 1;
     return 0;
   })
   return result.slice(0,5);
